@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fff8dc;
+    padding: 20px;
+    border-right: 2px solid #e2e8f0;
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.modifier {
+    margin: 10px 0;
+}
+
+.colmeia {
+    flex: 1;
+    padding: 30px;
+}
+
+.colmeia h1 {
+    margin-bottom: 20px;
+}
+
+canvas {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: #fcd34d;
+}
