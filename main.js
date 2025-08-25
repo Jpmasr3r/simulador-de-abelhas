@@ -1,77 +1,78 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+import Bee from "./src/Bee.js";
+import Drone from "./src/Drone.js";
+import Flower from "./src/Flower.js";
+import Honeycomb from "./src/Honeycomb.js";
+import id from "./src/Id.js";
+import Queen from "./src/Queen.js";
 
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-const beeImg = new Image();
-const queenImg = new Image();
 
-beeImg.src = 'assets/bee.png';
-queenImg.src = 'assets/queen.png';
+function spawn() {
+    for (let i = 0; i < 25; i++) {
+        let img = new Image();
+        img.src = "assets/honeycomb.png";
+        let x = Math.random() * ((canvas.width * 0.75) - 64);
+        let y = Math.random() * (canvas.height - 64);
 
-const abelhas = [];
-let queen;
-let queenWay = [];
+        const honeycomb = new Honeycomb(ctx, img, x, y);
+        id.add(honeycomb);
+    }
 
-function spawnAbelhas() {
     for (let i = 0; i < 10; i++) {
-        abelhas.push({
-            tipo: 'operaria',
-            x: Math.random() * (canvas.width - 32),
-            y: Math.random() * (canvas.height - 32),
-            img: beeImg
-        });
+        let img = new Image();
+        img.src = "assets/flower.png";
+        let x = (canvas.width * 0.75) + Math.random() * ((canvas.width * 0.25) - 64);
+        let y = Math.random() * (canvas.height - 64);
+
+        const flower = new Flower(ctx, img, x, y);
+        id.add(flower);
     }
 
-    for (i = 0; i <= 4; i++) {
-        let way = {
-            x: Math.random() * (canvas.width - 64),
-            y: Math.random() * (canvas.height - 64),
-        }
-        queenWay.push(way);
+    for (let i = 0; i < 10; i++) {
+        let img = new Image();
+        img.src = "assets/bee.png";
+        let x = Math.random() * ((canvas.width * 0.75) - 32);
+        let y = Math.random() * (canvas.height - 32);
+
+        const bee = new Bee(ctx, img, x, y);
+        id.add(bee);
     }
 
-    queen = {
-        tipo: 'rainha',
-        x: Math.random() * (canvas.width - 64),
-        y: Math.random() * (canvas.height - 64),
-        img: queenImg
-    }
-}
+    for (let i = 0; i < 10; i++) {
+        let img = new Image();
+        img.src = "assets/drone.png";
+        let x = Math.random() * ((canvas.width * 0.75) - 32);
+        let y = Math.random() * (canvas.height - 32);
 
-function desenhar() {
-    for (const abelha of abelhas) {
-        switch (abelha.tipo) {
-            case "operaria":
-                ctx.drawImage(abelha.img, Math.floor(abelha.x), Math.floor(abelha.y), 32, 32);
-                break;
-
-            default:
-                break;
-        }
+        const drone = new Drone(ctx, img, x, y);
+        id.add(drone);
     }
 
-    ctx.drawImage(queen.img, Math.floor(queen.x), Math.floor(queen.y), 64, 64);
-}
+    let img = new Image();
+    img.src = "assets/queen.png";
+    const queen = new Queen(
+        ctx,
+        img,
+        Math.random() * ((canvas.width * 0.75) - 64),
+        Math.random() * (canvas.height - 64)
+    );
+    id.add(queen);
 
-function move() {
-    const spd = 1;
-    queenWay.forEach(way => {
-        queen.x += spd * Math.sign(way.x);
-        queen.y += spd * Math.sign(way.y);
-    });
 }
 
 function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    desenhar();
-    move();
-    requestAnimationFrame(loop);
-};
 
-beeImg.onload = () => {
-    queenImg.onload = () => {
-        spawnAbelhas();
-        loop();
-    };
-};
+    id.ids.forEach(obj => {
+        obj.draw();
+        obj.update();
+    });
+
+    requestAnimationFrame(loop);
+}
+
+spawn();
+loop();
