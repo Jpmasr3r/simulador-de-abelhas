@@ -12,6 +12,10 @@ class Id {
     add(object) {
         this.ids.push(object)
     }
+
+    clear() {
+        this.ids = [];
+    }
 }
 
 let id = new Id();

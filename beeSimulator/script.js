@@ -9,9 +9,19 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
+const rebootBtn = document.querySelector("#reboot");
+
+const numBeeInput = document.querySelector("#numBee");
+const numQueenInput = document.querySelector("#numQueen");
+const numDroneInput = document.querySelector("#numDrone");
+const numFlowerInput = document.querySelector("#numFlower");
+const numHoneycombInput = document.querySelector("#numHoneycomb");
+
 
 function spawn() {
-    for (let i = 0; i < 25; i++) {
+    id.clear();
+
+    for (let i = 0; i < numHoneycombInput.value; i++) {
         let img = new Image();
         img.src = "assets/honeycomb.png";
         let x = Math.random() * ((canvas.width * 0.75) - 64);
@@ -21,7 +31,7 @@ function spawn() {
         id.add(honeycomb);
     }
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < numFlowerInput.value; i++) {
         let img = new Image();
         img.src = "assets/flower.png";
         let x = (canvas.width * 0.75) + Math.random() * ((canvas.width * 0.25) - 64);
@@ -31,7 +41,7 @@ function spawn() {
         id.add(flower);
     }
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < numBeeInput.value; i++) {
         let img = new Image();
         img.src = "assets/bee.png";
         let x = Math.random() * ((canvas.width * 0.75) - 32);
@@ -41,7 +51,7 @@ function spawn() {
         id.add(bee);
     }
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < numDroneInput.value; i++) {
         let img = new Image();
         img.src = "assets/drone.png";
         let x = Math.random() * ((canvas.width * 0.75) - 32);
@@ -51,15 +61,17 @@ function spawn() {
         id.add(drone);
     }
 
-    let img = new Image();
-    img.src = "assets/queen.png";
-    const queen = new Queen(
-        ctx,
-        img,
-        Math.random() * ((canvas.width * 0.75) - 64),
-        Math.random() * (canvas.height - 64)
-    );
-    id.add(queen);
+    for (let i = 0; i < numQueenInput.value; i++) {
+        let img = new Image();
+        img.src = "assets/queen.png";
+        const queen = new Queen(
+            ctx,
+            img,
+            Math.random() * ((canvas.width * 0.75) - 64),
+            Math.random() * (canvas.height - 64)
+        );
+        id.add(queen);
+    }
 
 }
 
@@ -76,3 +88,5 @@ function loop() {
 
 spawn();
 loop();
+
+rebootBtn.addEventListener("click", spawn);

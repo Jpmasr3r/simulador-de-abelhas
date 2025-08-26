@@ -1,12 +1,13 @@
 
 class GameObject {
-    constructor(ctx, sprite, x = 0, y = 0, size = { x: 32, y: 32 }) {
+    constructor(ctx, sprite, x = 0, y = 0, size = { x: 32, y: 32 }, state = "null") {
         this.ctx = ctx;
         this._sprite = sprite;
         this._x = x;
         this._y = y;
         this._size = size;
         this.spd = 1;
+        this.state = state;
 
         this.draw();
     }
@@ -59,8 +60,23 @@ class GameObject {
 
     }
 
-    move(x, y) {
+    move(follow) {
+        let targetX = follow.x + follow.sizex / 2 - this.sizex / 2;
+        let targetY = follow.y + follow.sizey / 2 - this.sizey / 2;
 
+        if (this._x !== targetX || this._y !== targetY) {
+            let dx = targetX - this._x;
+            let dy = targetY - this._y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < this.spd) {
+                this._x = targetX;
+                this._y = targetY;
+            } else {
+                this._x += (dx / dist) * this.spd;
+                this._y += (dy / dist) * this.spd;
+            }
+        }
     }
 }
 

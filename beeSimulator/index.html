@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Abelhas</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js" async></script>
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>Modificadores</h2>
+            <div class="modifier">
+                <label>Numero de Operarias</label>
+                <input type="number" id="numBee" value="10" />
+            </div>
+            <div class="modifier">
+                <label>Numero de rainhas</label>
+                <input type="number" id="numQueen" value="1" />
+            </div>
+            <div class="modifier">
+                <label>Numero de zangoes</label>
+                <input type="number" id="numDrone" value="5" />
+            </div>
+            <div class="modifier">
+                <label>Numero de Favos</label>
+                <input type="number" id="numHoneycomb" value="25" />
+            </div>
+            <div class="modifier">
+                <label>Numero de Flores</label>
+                <input type="number" id="numFlower" value="10" />
+            </div>
+            <button id="reboot">Aplicar</button>
+        </aside>
+
+        <main class="colmeia">
+            <h1>Colmeia</h1>
+            <canvas id="canvas" width="800" height="600"></canvas>
+        </main>
+    </div>
+</body>
+
+</html>

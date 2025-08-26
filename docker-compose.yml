@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: simulador_abelhas
+    ports:
+      - "8080:80"
+    volumes:
+      - ./beeSimulator:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+    
