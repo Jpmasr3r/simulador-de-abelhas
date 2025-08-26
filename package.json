@@ -1,4 +1,22 @@
 {
+  "name": "simulador-de-abelhas",
+  "version": "0.1.2",
+  "description": "",
+  "homepage": "https://github.com/Jpmasr3r/simulador-de-abelhas#readme",
+  "bugs": {
+    "url": "https://github.com/Jpmasr3r/simulador-de-abelhas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jpmasr3r/simulador-de-abelhas.git"
+  },
+  "license": "ISC",
+  "author": "Jpmasr3r",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc --watch"
+  },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
     "typescript": "^5.9.2"
