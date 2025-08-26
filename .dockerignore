@@ -1,0 +1,8 @@
+beeSimulator/dist
+node_modules
+Dockerfile
+docker-compose.yml
+.gitignore
+biome.json
+readme.md
+.vscode
