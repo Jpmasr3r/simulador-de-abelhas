@@ -1,5 +1,5 @@
 abstract class GameObject {
-	private _ctx: CanvasRenderingContext2D;
+	private _ctx: CanvasRenderingContext2D | null;
 	private _sprite: HTMLImageElement | null = null;
 	private _x: number;
 	private _y: number;
@@ -9,23 +9,26 @@ abstract class GameObject {
 	private _follow: GameObject | null = null;
 
 	constructor(
-		ctx: CanvasRenderingContext2D,
-		sprite: string,
+		ctx: CanvasRenderingContext2D | null,
+		sprite: string | null,
 		x: number,
 		y: number,
 		size: { x: number; y: number },
 		state: string | null,
+		spd: number = 1,
 	) {
 		this._ctx = ctx;
 		this._x = x;
 		this._y = y;
 		this._size = size;
-		this._spd = 1;
+		this._spd = spd;
 		this._state = state;
 
-		this.loadSprite(sprite).then((img) => {
-			this._sprite = img;
-		});
+		if (sprite) {
+			this.loadSprite(sprite).then((img) => {
+				this._sprite = img;
+			});
+		}
 	}
 
 	private loadSprite(src: string): Promise<HTMLImageElement> {
@@ -37,7 +40,7 @@ abstract class GameObject {
 		});
 	}
 
-	//#region getters
+	//getters
 	getSprite(): HTMLImageElement | null {
 		return this._sprite;
 	}
@@ -50,7 +53,7 @@ abstract class GameObject {
 		return this._spd;
 	}
 
-	getCtx(): CanvasRenderingContext2D {
+	getCtx(): CanvasRenderingContext2D | null {
 		return this._ctx;
 	}
 
@@ -73,9 +76,8 @@ abstract class GameObject {
 	getState(): string | null {
 		return this._state;
 	}
-	//#endregion
 
-	//#region setters
+	//setters
 	setX(x: number): void {
 		this._x = x;
 	}
@@ -84,7 +86,7 @@ abstract class GameObject {
 		this._state = state;
 	}
 
-	setFollow(follow: GameObject): void {
+	setFollow(follow: GameObject | null): void {
 		this._follow = follow;
 	}
 
@@ -103,19 +105,21 @@ abstract class GameObject {
 	setSizeY(y: number): void {
 		this._size.y = y;
 	}
-	//#endregion
 
-	//#region functions
+	//functions
 	draw(): void {
 		if (!this._sprite) return; // só desenha se já tiver carregado
 		try {
-			this.getCtx().drawImage(
-				this._sprite,
-				this._x,
-				this._y,
-				this._size.x,
-				this._size.y,
-			);
+			const ctx = this.getCtx();
+			if (ctx) {
+				ctx.drawImage(
+					this._sprite,
+					this._x,
+					this._y,
+					this._size.x,
+					this._size.y,
+				);
+			}
 		} catch (_error) {
 			console.log(_error);
 		}
@@ -146,7 +150,38 @@ abstract class GameObject {
 			}
 		}
 	}
-	//#endregion
+
+	colision(follow: GameObject | null): boolean {
+		if (!follow) {
+			return false;
+		}
+
+		const ax1 = this.getX();
+		const ay1 = this.getY();
+		const ax2 = ax1 + this.getSizeX();
+		const ay2 = ay1 + this.getSizeY();
+
+		const bx1 = follow.getX();
+		const by1 = follow.getY();
+		const bx2 = bx1 + follow.getSizeX();
+		const by2 = by1 + follow.getSizeY();
+
+		// Check for rectangle overlap
+		return ax1 < bx2 && ax2 > bx1 && ay1 < by2 && ay2 > by1;
+	}
+
+	timer(seconds: number): boolean {
+		if (!this._timerEnd || Date.now() > this._timerEnd + seconds * 1000) {
+			this._timerEnd = Date.now();
+			return false;
+		}
+		if (Date.now() - this._timerEnd >= seconds * 1000) {
+			this._timerEnd = undefined;
+			return true;
+		}
+		return false;
+	}
+	private _timerEnd?: number;
 }
 
 export default GameObject;

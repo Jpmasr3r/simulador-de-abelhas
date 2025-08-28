@@ -1,7 +1,8 @@
-version: "3.9"
-
 services:
   nginx:
     build: .
+    container_name: bee-simulator
     ports:
       - "8080:80"
+    
+

@@ -12,7 +12,7 @@ class Drone extends GameObject {
 		super(ctx, sprite, x, y, { x: 32, y: 32 }, "reproduce");
 	}
 
-	//#region functions
+	//functions
 	update() {
 		switch (this.getState()) {
 			case "reproduce":
@@ -28,18 +28,22 @@ class Drone extends GameObject {
 		const queens: Queen[] = Id.filter(Queen);
 
 		if (this.getFollow()) {
-			this.move(this.getFollow());
+			const queen = this.getFollow() as Queen;
+			this.move(queen);
+			if (queen.getFertilized()) {
+				this.setFollow(null);
+			} else if (this.colision(this.getFollow())) {
+				queen.setFertilized(true);
+			}
 		} else {
 			for (const queen of queens) {
-				if (queen.getFertilized()) {
-					continue;
+				if (!queen.getFertilized()) {
+					this.setFollow(queen);
+					break;
 				}
-				this.setFollow(queen);
-				break;
 			}
 		}
 	}
-	//#endregion
 }
 
 export default Drone;

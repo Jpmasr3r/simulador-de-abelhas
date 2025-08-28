@@ -14,17 +14,15 @@ class Flower extends GameObject {
 		this._haveBee = false;
 	}
 
-	//#region getter
+	//getter
 	getHaveBee(): boolean {
 		return this._haveBee;
 	}
-	//#endregion
 
-	//#region setter
+	//setter
 	setHaveBee(haveBee: boolean): void {
 		this._haveBee = haveBee;
 	}
-	//#endregion
 }
 
 export default Flower;

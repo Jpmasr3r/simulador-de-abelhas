@@ -10,7 +10,7 @@ Rainha
 
 Operaria
 
-* [ ]  femea, mas não é capaz de se reproduzir
+* [X]  femea, mas não é capaz de se reproduzir
 * [ ]  fazem limpeza da colmeia
 * [ ]  alimentam a rainha e larvas
 * [ ]  produzem cera

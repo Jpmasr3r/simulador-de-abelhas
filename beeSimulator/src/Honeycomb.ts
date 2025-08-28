@@ -1,7 +1,8 @@
 import GameObject from "./Object.js";
 
 class Honeycomb extends GameObject {
-	private _haveFood: boolean;
+	private _haveHoney: boolean;
+	private _haveBee: boolean;
 
 	constructor(
 		ctx: CanvasRenderingContext2D,
@@ -11,20 +12,26 @@ class Honeycomb extends GameObject {
 	) {
 		super(ctx, sprite, x, y, { x: 64, y: 64 }, null);
 
-		this._haveFood = false;
+		this._haveHoney = false;
+		this._haveBee = false;
 	}
 
-	//#region setter
-	setHaveFood(haveFood: boolean): void {
-		this._haveFood = haveFood;
+	//setter
+	sethaveHoney(haveHoney: boolean): void {
+		this._haveHoney = haveHoney;
 	}
-	//#endregion
 
-	//#region getter
-	getHaveFood(): boolean {
-		return this._haveFood;
+	setHaveBee(haveBee: boolean): void {
+		this._haveBee = haveBee;
 	}
-	//#endregion
+
+	//getter
+	gethaveHoney(): boolean {
+		return this._haveHoney;
+	}
+	getHaveBee(): boolean {
+		return this._haveBee;
+	}
 }
 
 export default Honeycomb;
