@@ -90,8 +90,10 @@ abstract class GameObject {
 		this._follow = follow;
 	}
 
-	setSprite(sprite: HTMLImageElement): void {
-		this._sprite = sprite;
+	setSprite(sprite: string): void {
+		this.loadSprite(sprite).then((img) => {
+			this._sprite = img;
+		});
 	}
 
 	setY(y: number): void {
@@ -170,18 +172,21 @@ abstract class GameObject {
 		return ax1 < bx2 && ax2 > bx1 && ay1 < by2 && ay2 > by1;
 	}
 
+	private _timerEnd: number | null = null;
+
 	timer(seconds: number): boolean {
-		if (!this._timerEnd || Date.now() > this._timerEnd + seconds * 1000) {
-			this._timerEnd = Date.now();
+		if (this._timerEnd === null) {
+			this._timerEnd = Date.now() + seconds * 1000;
 			return false;
 		}
-		if (Date.now() - this._timerEnd >= seconds * 1000) {
-			this._timerEnd = undefined;
+
+		if (Date.now() >= this._timerEnd) {
+			this._timerEnd = Date.now() + seconds * 1000; // reinicia automaticamente
 			return true;
 		}
+
 		return false;
 	}
-	private _timerEnd?: number;
 }
 
 export default GameObject;

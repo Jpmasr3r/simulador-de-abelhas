@@ -25,6 +25,10 @@ class Id {
 	filter(_class: any): any {
 		return id.allids().filter((obj) => obj instanceof _class);
 	}
+
+	delete(object: GameObject) {
+		this._ids = this._ids.filter((obj) => obj !== object);
+	}
 }
 
 const id = new Id();

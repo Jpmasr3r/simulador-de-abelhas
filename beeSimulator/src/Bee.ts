@@ -71,13 +71,24 @@ class Bee extends GameObject {
 	}
 
 	produceUpdate() {
-		const _honeycombs: Honeycomb[] = id.filter(Honeycomb);
-
 		if (this.getFollow()) {
-			this.move(this.getFollow());
+			const follow = this.getFollow() as Honeycomb;
+			this.move(follow);
+			if (follow.getHaveHoney()) {
+				follow.setHaveBee(false);
+				follow.setHaveHoney(true);
+				this.setHavePollen(false);
+				this.setFollow(null);
+				this.setState("flower");
+			} else if (this.colision(follow)) {
+				if (this.timer(5)) {
+					follow.setHaveHoney(true);
+				}
+			}
 		} else {
+			const _honeycombs: Honeycomb[] = id.filter(Honeycomb);
 			for (const honeycomb of _honeycombs) {
-				if (!honeycomb.getHaveBee()) {
+				if (!honeycomb.getHaveBee() && !honeycomb.getHaveHoney()) {
 					this.setFollow(honeycomb);
 					honeycomb.setHaveBee(true);
 					break;

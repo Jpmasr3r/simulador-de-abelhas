@@ -1,5 +1,6 @@
-import Id from "./Id.js";
+import id from "./Id.js";
 import GameObject from "./Object.js";
+import Path from "./Path.js";
 import Queen from "./Queen.js";
 
 class Drone extends GameObject {
@@ -9,40 +10,66 @@ class Drone extends GameObject {
 		x: number,
 		y: number,
 	) {
-		super(ctx, sprite, x, y, { x: 32, y: 32 }, "reproduce");
+		super(ctx, sprite, x, y, { x: 32, y: 32 }, "walkPaths", 2);
 	}
 
-	//functions
-	update() {
+	update(): void {
 		switch (this.getState()) {
 			case "reproduce":
 				this.reproduceUpdate();
 				break;
-
-			default:
+			case "walkPaths":
+				this.walkPathsUpdate();
 				break;
 		}
 	}
 
-	reproduceUpdate() {
-		const queens: Queen[] = Id.filter(Queen);
+	reproduceUpdate(): void {
+		let follow = this.getFollow() as Queen | null;
 
-		if (this.getFollow()) {
-			const queen = this.getFollow() as Queen;
-			this.move(queen);
-			if (queen.getFertilized()) {
-				this.setFollow(null);
-			} else if (this.colision(this.getFollow())) {
-				queen.setFertilized(true);
+		// se não tem alvo, procura rainha não fertilizada
+		if (!follow || follow.getFertilized()) {
+			const queens: Queen[] = id.filter(Queen);
+			follow = queens.find((q) => !q.getFertilized()) || null;
+			this.setFollow(follow);
+			if (!follow) {
+				this.setState("walkPaths"); // nada a fazer, vai vagar
+				return;
 			}
-		} else {
+		}
+
+		// se há alvo, move e fertiliza
+		this.move(follow);
+		if (this.colision(follow) && this.timer(5)) {
+			follow.setFertilized(true);
+			this.die();
+		}
+	}
+
+	walkPathsUpdate(): void {
+		if (this.getFollow()) {
+			console.log(this.getFollow());
+
+			this.move(this.getFollow());
+			const queens = id.filter(Queen) as Queen[];
 			for (const queen of queens) {
 				if (!queen.getFertilized()) {
 					this.setFollow(queen);
+					this.setState("reproduce");
 					break;
 				}
 			}
+		} else {
+			// movimento aleatório
+			const x = Math.random() * (800 * 0.75 - this.getSizeX());
+			const y = Math.random() * (600 - this.getSizeY());
+			const path = new Path(x, y);
+			this.setFollow(path);
 		}
+	}
+
+	die() {
+		id.delete(this);
 	}
 }
 

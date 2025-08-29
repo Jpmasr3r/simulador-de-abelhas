@@ -4,7 +4,7 @@ Rainha
 
 * [ ]  femea, unica que se reproduz
 * [X]  existe somente uma por colmeia
-* [ ]  apos reproduzir com varios zangoes coloca ovos em favos
+* [X]  apos reproduzir com varios zangoes coloca ovos em favos
 * [ ]  libera feromonios de agregação
 * [X]  a mais comprida
 
@@ -12,15 +12,15 @@ Operaria
 
 * [X]  femea, mas não é capaz de se reproduzir
 * [ ]  fazem limpeza da colmeia
-* [ ]  alimentam a rainha e larvas
+* [X]  alimentam a rainha e larvas
 * [ ]  produzem cera
-* [ ]  coletam nectar e polen
+* [X]  coletam nectar e polen
 * [ ]  na falta da rainha podem botar ovos, mas que dão origem apenas a zangoes
 * [X]  as menores
 
 Zangão
 
-* [ ]  macho, fecunda a rainha
+* [X]  macho, fecunda a rainha
 * [ ]  apos acasalarem morrem
 * [X]  os mais corpulento
 
