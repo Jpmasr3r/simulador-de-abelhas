@@ -26,8 +26,8 @@ Zangão
 
 Ciclo de Vida
 
-* [ ]  ovo -> larva -> pulpa -> adulto
+* [X]  ovo -> larva -> pulpa -> adulto
 * [ ]  ovos fecundados dão origem a femeas e não fecundados a machos
-* [ ]  a larva nasce do ovo e se alimenta ainda dentro do favo
-* [ ]  apos crecer tece um pulpo
-* [ ]  então rompe o pulpo e começa sua fase adulta
+* [X]  a larva nasce do ovo e se alimenta ainda dentro do favo
+* [X]  apos crecer tece um pulpo
+* [X]  então rompe o pulpo e começa sua fase adulta
