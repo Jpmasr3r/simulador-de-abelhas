@@ -2,14 +2,11 @@
     "compilerOptions": {
         "target": "es2024",
         "module": "esnext",
-        "outDir": "./beeSimulator/dist",
+        "outDir": "./app/public/dist",
         "strict": true,
         "esModuleInterop": true
     },
     "include": [
-        "./beeSimulator/src",
+        "./app/src"
     ],
-    "exclude": [
-        "./beeSimulator/dist"
-    ]
 }

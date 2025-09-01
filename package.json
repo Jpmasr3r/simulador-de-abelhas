@@ -17,15 +17,6 @@
   "scripts": {
     "build": "tsc"
   },
-  "build": {
-    "appId": "com.simulador.abelhas",
-    "files": [
-      "/beeSimulator"
-    ],
-    "win": {
-      "target": "nsis"
-    }
-  },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
     "typescript": "^5.9.2"
