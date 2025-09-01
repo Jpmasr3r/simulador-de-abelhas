@@ -2,6 +2,7 @@
   "name": "simulador-de-abelhas",
   "version": "0.1.2",
   "description": "",
+  "main": "electron.js",
   "homepage": "https://github.com/Jpmasr3r/simulador-de-abelhas#readme",
   "bugs": {
     "url": "https://github.com/Jpmasr3r/simulador-de-abelhas/issues"
@@ -14,8 +15,16 @@
   "author": "Jpmasr3r",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "tsc --watch"
+    "build": "tsc"
+  },
+  "build": {
+    "appId": "com.simulador.abelhas",
+    "files": [
+      "/beeSimulator"
+    ],
+    "win": {
+      "target": "nsis"
+    }
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
