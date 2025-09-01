@@ -56,7 +56,7 @@ function spawn(): void {
 	const configs: SpawnConfig[] = [
 		{
 			classRef: Honeycomb,
-			img: "./assets/honeycomb.png",
+			img: "../assets/honeycomb.png",
 			count: Number(inputs.numHoneycomb.value),
 			width: 64,
 			height: 64,
@@ -64,7 +64,7 @@ function spawn(): void {
 		},
 		{
 			classRef: Flower,
-			img: "./assets/flower.png",
+			img: "../assets/flower.png",
 			count: Number(inputs.numFlower.value),
 			width: 64,
 			height: 64,
@@ -72,7 +72,7 @@ function spawn(): void {
 		},
 		{
 			classRef: Bee,
-			img: "./assets/bee.png",
+			img: "../assets/bee.png",
 			count: Number(inputs.numBee.value),
 			width: 32,
 			height: 32,
@@ -80,7 +80,7 @@ function spawn(): void {
 		},
 		{
 			classRef: Drone,
-			img: "./assets/drone.png",
+			img: "../assets/drone.png",
 			count: Number(inputs.numDrone.value),
 			width: 32,
 			height: 32,
@@ -88,7 +88,7 @@ function spawn(): void {
 		},
 		{
 			classRef: Queen,
-			img: "./assets/queen.png",
+			img: "../assets/queen.png",
 			count: Number(inputs.numQueen.value),
 			width: 64,
 			height: 64,

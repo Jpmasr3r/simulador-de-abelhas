@@ -14,8 +14,7 @@
   "author": "Jpmasr3r",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "tsc --watch"
+    "build": "tsc"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
