@@ -14,10 +14,18 @@
   "author": "Jpmasr3r",
   "type": "module",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "docker compose up -d --build",
+    "stop": "docker compose down",
+    "dev": "docker compose up --build",
+    "tauri": "tauri"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.8.0",
+    "@tauri-apps/cli": "^2.8.4"
   }
 }
