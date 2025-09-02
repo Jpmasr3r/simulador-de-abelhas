@@ -6,3 +6,4 @@ docker-compose.yml
 biome.json
 readme.md
 .vscode
+src-tauri
